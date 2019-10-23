@@ -2,98 +2,29 @@
 
 
 ```
--show_error
-    Show information about the error found when trying to probe the input.
-
-    The error information is printed within a section with name "ERROR".
-
--show_format
-    Show information about the container format of the input multimedia stream.
-
-    All the container format information is printed within a section with name "FORMAT".
-
--show_entries section_entries
-    Set list of entries to show.
-
-    Entries are specified according to the following syntax. section_entries contains a list of section entries separated by ":". Each section
-    entry is composed by a section name (or unique name), optionally followed by a list of entries local to that section, separated by ",".
-
-    If section name is specified but is followed by no "=", all entries are printed to output, together with all the contained sections.
-    Otherwise only the entries specified in the local section entries list are printed. In particular, if "=" is specified but the list of
-    local entries is empty, then no entries will be shown for that section.
-
-    Note that the order of specification of the local section entries is not honored in the output, and the usual display order will be
-    retained.
-
-    The formal syntax is given by:
-
-            <LOCAL_SECTION_ENTRIES> ::= <SECTION_ENTRY_NAME>[,<LOCAL_SECTION_ENTRIES>]
-            <SECTION_ENTRY>         ::= <SECTION_NAME>[=[<LOCAL_SECTION_ENTRIES>]]
-            <SECTION_ENTRIES>       ::= <SECTION_ENTRY>[:<SECTION_ENTRIES>]
-
-    For example, to show only the index and type of each stream, and the PTS time, duration time, and stream index of the packets, you can
-    specify the argument:
-
-            packet=pts_time,duration_time,stream_index : stream=index,codec_type
-
-    To show all the entries in the section "format", but only the codec type in the section "stream", specify the argument:
-
-            format : stream=codec_type
-
-    To show all the tags in the stream and format sections:
-
-            stream_tags : format_tags
-
-    To show only the "title" tag (if available) in the stream sections:
-
-            stream_tags=title
-
--show_packets
-    Show information about each packet contained in the input multimedia stream.
-
-    The information for each single packet is printed within a dedicated section with name "PACKET".
-
--show_frames
-    Show information about each frame and subtitle contained in the input multimedia stream.
-
-    The information for each single frame is printed within a dedicated section with name "FRAME" or "SUBTITLE".
-
--show_log loglevel
-    Show logging information from the decoder about each frame according to the value set in loglevel, (see "-loglevel"). This option requires
-    "-show_frames".
-
-    The information for each log message is printed within a dedicated section with name "LOG".
-
--show_streams
-    Show information about each media stream contained in the input multimedia stream.
-
-    Each media stream information is printed within a dedicated section with name "STREAM".
-
--show_programs
-    Show information about programs and their streams contained in the input multimedia stream.
-
-    Each media stream information is printed within a dedicated section with name "PROGRAM_STREAM".
-
--show_chapters
-    Show information about chapters stored in the format.
-
-    Each chapter is printed within a dedicated section with name "CHAPTER".
-
--count_frames
-    Count the number of frames per stream and report it in the corresponding stream section.
-
--count_packets
-    Count the number of packets per stream and report it in the corresponding stream section.
-
--show_pixel_formats
-    Show information about all pixel formats supported by FFmpeg.
-
-    Pixel format information for each format is printed within a section with name "PIXEL_FORMAT".
+-print_format format  set the output printing format (available formats are: default, compact, csv, flat, ini, json, xml)
+-show_data          show packets data
+-show_data_hash     show packets data hash
+-show_error         show probing error
+-show_format        show format/container info
+-show_frames        show frames info
+-show_format_entry entry  show a particular entry from the format/container info
+-show_entries entry_list  show a set of specified entries
+-show_log           show log
+-show_packets       show packets info
+-show_programs      show programs info
+-show_streams       show streams info
+-show_chapters      show chapters info
+-show_program_version  show ffprobe version
+-show_library_versions  show library versions
+-show_versions      show program and library versions
+-show_pixel_formats  show pixel format descriptions
+-show_private_data  show private data
 ```
 
 Show stream and format information
 ```
-$ ffprobe -v error -show_format -show_streams input.mp4
+$ ffprobe -v error -print_format json -show_format -show_streams input.mp4
 [STREAM]
 index=0
 codec_name=h264

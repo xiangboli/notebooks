@@ -10,6 +10,54 @@ ffmpeg -i example.mp4 -c:v rawvideo -pix_fmt yuv420p example.yuv
 ffmpeg -i example.mp4 -vcodec copy -an example.mp4
 ```
 
+
+## How to run video quality tool with FFmpeg
+Before running FFmpeg quality tools, both videos needs to be the same resolution, frame rate, sar, pix_fmt, otherwise the results can be very off, especially for vmaf.
+### PSNR
+Without saving the results in a log file:
+```
+ffmpeg -i distorted.mp4 -i reference.mp4 -lavfi  psnr -f null -
+```
+With saving the results in a log file:
+```
+ffmpeg -i distorted.mp4 -i reference.mp4 -lavfi  psnr=psnr.log -f null -
+```
+
+### SSIM and PSNR
+Without saving the results in log file:
+```
+ffmpeg -i distorted.mp4 -i reference.mp4 -lavfi "ssim;[0:v][1:v]psnr" -f null –
+```
+With saving the results in ssim.log and psnr.log files containing the results for every frame:
+```
+ffmpeg -i distorted.mp4 -i reference.mp4 -lavfi "ssim=ssim.log;[0:v][1:v]psnr=psnr.log" -f null –
+```
+
+### VMAF
+Insall libvmaf:
+```
+git clone https://github.com/Netflix/vmaf.git
+cd vmaf
+```
+and then follow: https://github.com/Netflix/vmaf/blob/master/resource/doc/libvmaf.md
+
+*Note: You may need to copy `vmaf` `libvmaf.pc` from `/usr/local/lib/pkgconfig` to `/usr/lib64/pkgconfig`
+or `export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig`*
+
+After install FFmpeg with libvmaf, run: 
+```
+ffmpeg -i input.h264 -i output.mp4 -lavfi libvmaf="n_threads=4:log_fmt=json:log_path=vmaf.log" -f null -
+```
+Get PSNR, SSIM and VMAF at the same time:
+```
+ffmpeg -i input_1.mp4 -an -i input_2.mp4 -an -sws_flags lanczos -filter_complex \ 
+'[0:v]setfield=prog,scale=1920:1080,setsar=sar=1/1,format=yuv420p,fps=24000/1001,split=3[encoded1][encoded2][encoded3];\
+[1:v]setfield=prog,scale=1920:1080,setsar=sar=1/1,format=yuv420p,fps=24000/1001,split=3[reference1][reference2][reference3];\
+[encoded1][reference1]ssim=stats_file=ssim.log;[encoded2][reference2]psnr=stats_file=psnr.log;[encoded3][reference3]libvmaf=n_threads=50:log_path=vmaf.log' \
+-f null -y /dev/null 2>process.log 1>&2
+```
+
+
 *Note: some of the following contents are shamfully copied from (https://github.com/leandromoreira/digital_video_introduction) for easy reference*
 
 
@@ -286,6 +334,8 @@ ffmpeg -i input.mp4 -c:v rawvideo -pix_fmt yuv420p output.yuv
 # run vmaf original h264 vs transcoded vp9
 vmaf run_vmaf yuv420p 1080 720 input.yuv output.yuv --out-fmt json
 ```
+
+
 
 ## FFMpeg as a library
 
