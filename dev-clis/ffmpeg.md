@@ -15,7 +15,7 @@ ffmpeg -i example.mp4 -vcodec copy -an example.mp4
 Before running FFmpeg quality tools, both videos needs to be the same resolution, frame rate, sar, pix_fmt, otherwise the results can be very off, especially for vmaf.
 ### PSNR
 Without saving the results in a log file:
-```
+```bash
 ffmpeg -i distorted.mp4 -i reference.mp4 -lavfi  psnr -f null -
 ```
 With saving the results in a log file:

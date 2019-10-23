@@ -30,6 +30,14 @@ or
 top -H -p pid
 ```
 
+## Work with jq, grep, sort, uniqe, wc 
+```bash
+cat test_atom_map | jq '.atom_map | .[] | select(.tick_size != null) | .tick_size | ."1"' | sort -u | wc -l
+```
+```bash
+cat hm_decode.log | grep "QPs" | sort -u | wc -l
+```
+
 ## Sed & Awk
 [sed introduction](http://www.grymoire.com/Unix/Sed.html) <br/>
 [awk introduction](http://www.grymoire.com/Unix/Awk.html)
