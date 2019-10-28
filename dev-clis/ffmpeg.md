@@ -38,6 +38,11 @@ s - subtitles, such as `-map -0:s`
 
 d - data, such as `-map -0:d`
 
+## Extract a Portion of a Video
+```
+ffmpeg -ss 00:00:30 -i input.mp4 -t 00:00:05 -vcodec copy -acodec copy output.mp4
+```
+In the example above, we are cutting out a part starting at 00:00:30 into the original file with a 5 seconds length. -ss indicates the starting time, and -t indicates the duration.
 
 
 ## How to run video quality tool with FFmpeg
