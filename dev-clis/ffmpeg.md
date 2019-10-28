@@ -5,10 +5,36 @@
 ffmpeg -i example.mp4 -c:v rawvideo -pix_fmt yuv420p example.yuv
 ```
 
-## Remove audio 
+## Remove stream
+
+Remove a specific audio stream
+```
+ffmpeg -i input -map 0 -map -0:a:2 -c copy output
+```
+`-map 0` selects all streams from the input.
+`-map -0:a:2` then deselects audio stream 3. The stream index starts counting from 0, so audio stream 10 would be `0:a:9`.
+
+Remove all audio streams
+```
+ffmpeg -i input -map 0 -map -0:a -c copy output
+```
+-map 0 selects all streams from the input.
+-map -0:a then deselects all audio streams from the input.
+
+or 
 ```bash
 ffmpeg -i example.mp4 -vcodec copy -an example.mp4
 ```
+
+Removing other stream types
+
+If you want to remove other stream types you can use the appropriate stream specifier.
+
+v - video, such as -map -0:v
+a - audio, such as -map -0:a (as shown above)
+s - subtitles, such as -map -0:s
+d - data, such as -map -0:d 
+
 
 
 ## How to run video quality tool with FFmpeg
