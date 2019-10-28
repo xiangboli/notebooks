@@ -30,10 +30,13 @@ Removing other stream types
 
 If you want to remove other stream types you can use the appropriate stream specifier.
 
-v - video, such as -map -0:v
-a - audio, such as -map -0:a (as shown above)
-s - subtitles, such as -map -0:s
-d - data, such as -map -0:d 
+v - video, such as `-map -0:v`
+
+a - audio, such as `-map -0:a` (as shown above)
+
+s - subtitles, such as `-map -0:s`
+
+d - data, such as `-map -0:d`
 
 
 
