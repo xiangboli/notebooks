@@ -26,6 +26,7 @@ Navigate to your GitHub account → Settings → SSH and GPG keys, and paste abo
 
 Add this key in terminal:
 ```bash
+ssh-add -D  //delete all keys
 ssh-add .ssh/id_rsa_IDENTIFIABLE_NAME_HERE
 ```
 ## Common Git Steps
@@ -66,6 +67,21 @@ Discard all changes from last commit:
 git reflog
 git reset --hard HEAD@{<reflog index number>}
 ```
+
+### unable to access, 403 issue
+1. edit `.git/config` file under your repo directory
+2. find url=entry under section [remote "origin"]
+3. change it from `url=https://MichaelDrogalis@github.com/derekerdmann/lunch_call.git` to `url=ssh://git@github.com/derekerdmann/lunch_call.git`. that is, change all the texts before @ symbol to ssh://git
+4. Save config file and quit. now you could use git push origin master to sync your repo on GitHub
+
+or 
+```bash
+git remote set-url origin "https://github-username@github.com/github-username/github-repository-name.git"
+```
+
+or
+`git clone ssh_url instead of https`
+
 
 ## Work with remote
 Show remotes:
