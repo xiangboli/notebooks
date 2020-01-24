@@ -82,6 +82,13 @@ git remote set-url origin "https://github-username@github.com/github-username/gi
 or
 `git clone ssh_url instead of https`
 
+or
+add the following line in the ~/.gitconfig
+```
+[url "git@github.com:"]
+  insteadOf = https://github.com/`
+```
+
 
 ## Work with remote
 Show remotes:
