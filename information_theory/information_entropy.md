@@ -10,6 +10,7 @@ we’ve narrowed it down to one choice. Amount of information = log2(2/1) = 1 bi
 ##### Roll of two dice
 Each die has six faces, so in the roll of two dice there are 36 possible combinations for
 the outcome. Amount of information = log2(36/1) = 5.2 bits.
+
 ### Entropy
 
 Now that we know how to measure the information contained in a given event, we can quantify the expected information in a set of possible outcomes. Specifically, if an event i occurs with probability pi, $1 ≤ i ≤ N$ out of a set of N events, then the average or expected information is given by
