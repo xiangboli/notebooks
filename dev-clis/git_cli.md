@@ -1,6 +1,6 @@
 # Useful Git Commands
 
-## Create & add SSH Key
+## Create and add SSH Key
 
 ```bash
 ssh-keygen -t rsa -C “your-email-address”
@@ -88,6 +88,53 @@ add the following line in the ~/.gitconfig
 [url "git@github.com:"]
   insteadOf = https://github.com/`
 ```
+
+# switch among multiple accounts
+1. create ssh key and add on github ([as shown above](#create-and-add-SSH-key))
+2. create configuration files to manage keys
+```bash
+$ touch config
+```
+add 
+```
+# Personal account - default config
+Host github.com
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/id_rsa_personal
+# Work account
+Host github.com-work
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/id_rsa_work
+```
+3. edit gitconfig
+```bash
+$ cd ~
+$ nano ~/.gitconfig
+```
+add
+```
+[url "git@github.com:"]
+      insteadOf = https://github.com/
+[user]
+	name = username
+	email = username@domain.com
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
+```
+4. create work gitconfig
+```
+$ nano ~/work/.gitconfig
+```
+add
+```
+[user]
+	name = username
+	email = username@domain.com
+```
+
+
 
 
 ## Work with remote
