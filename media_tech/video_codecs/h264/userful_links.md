@@ -1,5 +1,5 @@
 
-### Online Articles
+## Online Articles
 * [Leandro Moreira's Video Endcoding Introduction](https://github.com/leandromoreira/digital_video_introduction)
 
 * [Chan's Blog About H.264 Bitstream](https://yumichan.net/category/video-processing/)
@@ -15,8 +15,8 @@
 * [Resize Filter Algorithms for Video](https://superuser.com/questions/375718/which-resize-algorithm-to-choose-for-videos)
 
 
-### Papers and Books
+## Papers and Books
 * 
 
-### Online Course
+## Online Course
 * [TU Berlin's Image & Video Coding](https://www.ic.tu-berlin.de/menue/studium_und_lehre/parameter/en/)
