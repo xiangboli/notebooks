@@ -1,4 +1,6 @@
 # Useful FFmpeg Commands
+## Install FFmpeg
+brew install ffmpeg --with-tools --with-fdk-aac --with-freetype --with-fontconfig --with-libass --with-libvorbis --with-libaom --with-libvmaf --with-libvpx --with-opus --with-x265 --with-openssl --with-sdl2  --with-libcaca --with-rtmpdump  --with-schroedinger --with-speex --with-theora --with-ffplay --with-webp --with-libvpx
 
 ## Decode to yuv raw video
 ```bash
